@@ -8,10 +8,19 @@ var twit = new Twit({
 });
 
 var uk = [ '-9.23', '49.84', '2.69', '60.85' ];
+//var stream = twit.stream('statuses/filter', { locations: uk })
 var stream = twit.stream('statuses/filter', { locations: uk })
-
 stream.on('tweet', processTweet);
-
+var log=fs.createWriteStream('tweets.log')
 function processTweet(tweet) {
-  console.log(tweet);
+  //console.log(tweet);
+	//var strTweet=JSON.stringify(tweet);
+	//log.write(strTweet);
+
+	var regexp=/[Ff]ootball|[Ss]aturday/g;
+	if(regexp.test(tweet.text)) {
+	console.log(tweet.text);
+		}
+
 };
+
